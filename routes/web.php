@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SalesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Admin\ReportController;
 
 use App\Http\Middleware\AdminMiddleware;
 
@@ -44,6 +45,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', AdminMiddleware::cla
     // Rutas para ventas
     Route::resource('sales', \App\Http\Controllers\Admin\SalesController::class)->only(['index', 'show', 'destroy']);
     Route::put('sales/{id}/reactivate', [\App\Http\Controllers\Admin\SalesController::class, 'reactivate'])->name('sales.reactivate');
+
+    // Reporte de productos
+    Route::get('reports/products', [ReportController::class, 'productsReport'])->name('reports.products');
 });
 
 // Rutas públicas (catálogo de productos)
