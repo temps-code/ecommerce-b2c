@@ -41,7 +41,7 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('admin.products.create', compact('categories'));
     }
-
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -49,24 +49,37 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price'       => 'required|numeric',
             'stock'       => 'required|integer',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Toma todos los datos del request
-        $data = $request->all();
+        // Toma los datos del request excepto la imagen
+        $data = $request->except('image');
 
-        // Procesa la carga de la imagen si se envía
+        // Si se envía una imagen...
         if ($request->hasFile('image')) {
-            // Almacena la imagen en la carpeta "public/products"
-            $path = $request->file('image')->store('products', 'public');
-            $data['image_path'] = $path;
+            $file = $request->file('image');
+
+            // Define la ruta de destino en public/storage/products
+            $destinationPath = public_path('storage/products');
+
+            // Genera un nombre único para el archivo
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            // Mueve el archivo al destino
+            $file->move($destinationPath, $filename);
+
+            // Guarda la ruta relativa en la base de datos (por ejemplo: "products/filename.jpg")
+            $data['image_path'] = 'products/' . $filename;
         }
 
-        Product::create($data);
+        \App\Models\Product::create($data);
 
         return redirect()->route('admin.products.index')
-                         ->with('success', 'Producto creado exitosamente.');
+                        ->with('success', 'Producto creado exitosamente.');
     }
 
+    
+    
     public function edit(Product $product)
     {
         $categories = Category::all();

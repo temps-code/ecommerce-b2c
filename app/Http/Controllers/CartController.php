@@ -17,36 +17,36 @@ class CartController extends Controller
     public function add(Request $request, $productId)
     {
         $product = Product::find($productId);
-    
+
         if (!$product) {
             return redirect()->route('cart.index')->with('error', 'El producto no existe.');
         }
-    
+
         // Obtener el carrito asegurando que sea un array
         $cart = session()->get('cart', []);
-    
         if (!is_array($cart)) {
             $cart = [];
         }
-    
+
         // Si el producto ya está en el carrito, aumentamos la cantidad
         if (isset($cart[$productId]) && is_array($cart[$productId])) {
             $cart[$productId]['quantity'] += 1;
         } else {
-            // Agregar el producto con su información
+            // Agregar el producto con su información, usando "image_path"
             $cart[$productId] = [
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => 1,
-                'image' => $product->image,
+                'name'        => $product->name,
+                'price'       => $product->price,
+                'quantity'    => 1,
+                'image_path'  => $product->image_path, // Aquí se usa la clave correcta
             ];
         }
-    
-        // Guardamos el carrito asegurando que se almacena correctamente como un array
+
+        // Guardamos el carrito
         session()->put('cart', $cart);
-    
+
         return redirect()->route('cart.index')->with('success', 'Producto agregado al carrito.');
     }
+
     public function checkout()
     {
         if (!session()->has('cart') || empty(session('cart'))) {

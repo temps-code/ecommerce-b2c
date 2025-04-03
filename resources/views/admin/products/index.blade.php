@@ -70,13 +70,13 @@
         @forelse($products as $product)
           <tr>
             <td class="px-6 py-4 whitespace-nowrap">
-              @if($product->image_path)
-                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
-              @else
-                <div class="w-16 h-16 flex items-center justify-center bg-gray-200 rounded">
-                  <i class="fas fa-image text-gray-500"></i>
-                </div>
-              @endif
+                @if($product->image_path)
+                    <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
+                @else
+                    <div class="w-16 h-16 flex items-center justify-center bg-gray-200 rounded">
+                        <i class="fas fa-image text-gray-500"></i>
+                    </div>
+                @endif
             </td>
             <td class="px-6 py-4 whitespace-nowrap">{{ $product->name }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ $product->category->name }}</td>

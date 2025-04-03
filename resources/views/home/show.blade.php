@@ -7,10 +7,9 @@
     <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl">
         <!-- Product Image with Floating Badge -->
         <div class="relative group">
-            <img src="{{ asset('storage/' . $product->image) }}" 
-                 alt="{{ $product->name }}" 
-                 class="w-full h-96 object-cover object-center transition-transform duration-500 group-hover:scale-105">
-            
+            <img src="{{ asset('storage/' . $product->image_path) }}" 
+                alt="{{ $product->name }}" 
+                class="w-full h-96 object-cover object-center transition-transform duration-500 group-hover:scale-105">
             <!-- Floating Product Name -->
             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
                 <h1 class="text-3xl md:text-4xl font-bold text-white">{{ $product->name }}</h1>

@@ -22,8 +22,7 @@
                             <tr class="border-t hover:bg-gray-50">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
-                                        <img src="{{ asset('storage/' . $product['image']) }}" alt="{{ $product['name'] }}"
-                                            class="w-16 h-16 object-cover rounded-md mr-4">
+                                        <img src="{{ asset('storage/' . $product['image_path']) }}" alt="{{ $product['name'] }}" class="w-16 h-16 object-cover rounded-md mr-4">
                                         <span class="text-lg font-semibold text-gray-800">{{ $product['name'] }}</span>
                                     </div>
                                 </td>
