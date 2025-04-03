@@ -34,10 +34,14 @@
         </select>
       </div>
     </div>
-    <div class="mt-4">
+    <div class="mt-4 flex justify-between">
       <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded inline-flex items-center">
         <i class="fa-solid fa-search mr-2"></i> Filtrar
       </button>
+      <!-- Botón para generar reporte PDF de ventas -->
+      <a href="{{ route('admin.reports.sales', request()->all()) }}" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded inline-flex items-center">
+        <i class="fa-solid fa-file-pdf mr-2"></i> Generar Reporte PDF
+      </a>
     </div>
   </form>
 

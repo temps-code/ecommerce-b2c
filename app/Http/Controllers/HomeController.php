@@ -24,4 +24,9 @@ class HomeController extends Controller
         return view('home.mostrarproductos', compact('products'));  // Asegúrate de tener esta vista
     }
     
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('home.show', compact('product'));
+    }
 }

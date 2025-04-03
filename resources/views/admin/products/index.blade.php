@@ -41,19 +41,16 @@
         </select>
       </div>
     </div>
-    <div class="mt-4">
+    <!-- Contenedor de botones en una misma fila -->
+    <div class="mt-4 flex justify-between items-center">
       <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded inline-flex items-center">
         <i class="fas fa-search mr-2"></i> Filtrar
       </button>
+      <a href="{{ route('admin.reports.products', request()->all()) }}" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded inline-flex items-center">
+        <i class="fa-solid fa-file-pdf mr-2"></i> Generar Reporte PDF
+      </a>
     </div>
   </form>
-
-  <!-- Botón para generar reporte PDF -->
-  <div class="mt-4 flex justify-end">
-      <a href="{{ route('admin.reports.products', request()->all()) }}" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded inline-flex items-center">
-          <i class="fa-solid fa-file-pdf mr-2"></i> Generar Reporte PDF
-      </a>
-  </div>
 
   <!-- Tabla de Productos -->
   <div class="overflow-x-auto mt-6">

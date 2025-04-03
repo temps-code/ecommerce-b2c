@@ -3,40 +3,90 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CartController extends Controller
 {
+    // Mostrar carrito
     public function index()
     {
-        // Aquí puedes retornar la vista del carrito o los productos agregados
         return view('cart.index');
     }
 
-    public function add($productId)
+    // Agregar producto al carrito
+    public function add(Request $request, $productId)
     {
-        // Lógica para agregar productos al carrito
-        // Asumimos que usas una sesión o base de datos para manejar el carrito
-        // Aquí solo es un ejemplo
-        session()->push('cart', $productId);
-
-        return redirect()->route('cart.index');
-    }
-
-    public function update($productId)
-    {
-        // Lógica para actualizar el carrito
-        return redirect()->route('cart.index');
-    }
-
-    public function remove($productId)
-    {
-        // Lógica para eliminar un producto del carrito
+        $product = Product::find($productId);
+    
+        if (!$product) {
+            return redirect()->route('cart.index')->with('error', 'El producto no existe.');
+        }
+    
+        // Obtener el carrito asegurando que sea un array
         $cart = session()->get('cart', []);
-        if (($key = array_search($productId, $cart)) !== false) {
-            unset($cart[$key]);
+    
+        if (!is_array($cart)) {
+            $cart = [];
+        }
+    
+        // Si el producto ya está en el carrito, aumentamos la cantidad
+        if (isset($cart[$productId]) && is_array($cart[$productId])) {
+            $cart[$productId]['quantity'] += 1;
+        } else {
+            // Agregar el producto con su información
+            $cart[$productId] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+                'image' => $product->image,
+            ];
+        }
+    
+        // Guardamos el carrito asegurando que se almacena correctamente como un array
+        session()->put('cart', $cart);
+    
+        return redirect()->route('cart.index')->with('success', 'Producto agregado al carrito.');
+    }
+    public function checkout()
+    {
+        if (!session()->has('cart') || empty(session('cart'))) {
+            return redirect()->route('cart.index')->with('error', 'Tu carrito está vacío.');
+        }
+    
+        // Aquí puedes manejar el proceso de compra, por ejemplo, guardarlo en la base de datos.
+        
+        session()->forget('cart'); // Vaciar el carrito después de la compra
+        return redirect()->route('home')->with('success', 'Compra realizada con éxito.');
+    }
+        
+    
+
+    // Actualizar cantidad del carrito
+    public function update(Request $request, $id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $request->quantity;
             session()->put('cart', $cart);
         }
+        return redirect()->route('cart.index')->with('message', 'Carrito actualizado');
+    }
 
-        return redirect()->route('cart.index');
+    // Eliminar producto del carrito
+    public function remove($id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+        return redirect()->route('cart.index')->with('message', 'Producto eliminado del carrito');
+    }
+
+    // Vaciar carrito
+    public function clear()
+    {
+        session()->forget('cart');
+        return redirect()->route('cart.index')->with('message', 'Carrito vaciado');
     }
 }
