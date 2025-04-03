@@ -9,8 +9,8 @@
 📚 Materia: Tecnología Web II
 
 <div align="center">
-  <img src="/public/images/admin.jpg" alt="Admin Dashboard" style="width:49%; display: inline-block; border-radius: 8px;">
-  <img src="/public/images/user.jpg" alt="User Interface" style="width:49%; display: inline-block; border-radius: 8px;">
+  <img src="https://github.com/temps-code/ecommerce-b2c/blob/main/public/storage/images/admin.jpg" alt="Admin Dashboard" style="width:49%; display: inline-block; border-radius: 8px;">
+  <img src="https://github.com/temps-code/ecommerce-b2c/blob/main/public/storage/images/user.jpg" alt="User Interface" style="width:49%; display: inline-block; border-radius: 8px;">
 </div>
 
 ## 🌟 Características Principales
