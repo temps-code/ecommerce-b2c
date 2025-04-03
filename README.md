@@ -44,9 +44,9 @@
 
 | Integrante         | Rol Principal        | Contribuciones Clave                          |
 | ------------------ | -------------------- | --------------------------------------------- |
-| **Diego Vargas**   | Backend Architect    | Sistema de administración • Lógica de negocio |
-| **Damaris Mamani** | Frontend Specialist  | Experiencia de usuario • Diseño interactivo   |
-| **Yordy Sanchez**  | Full-Stack Developer | Integración API • Diseño responsive           |
+| **Diego Vargas**   | Backend Developer    | Sistema de administración • Lógica de negocio |
+| **Damaris Mamani** | Frontend Developer   | Interfaz de cliente • Experiencia de usuario  |
+| **Yordy Sanchez**  | Full-Stack Developer | Integración cliente-servidor • Diseño UI/UX   |
 
 ## ⚙️ Configuración del Proyecto
 
