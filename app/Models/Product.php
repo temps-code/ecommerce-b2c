@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function saleDetails() {
+        return $this->hasMany(\App\Models\SaleDetail::class, 'product_id', 'id');
+     }
+     
 }
